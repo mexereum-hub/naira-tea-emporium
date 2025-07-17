@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingCart, Search, Menu, X, Heart, User, Leaf } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { useSearch } from "@/contexts/SearchContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [cartItems] = useState(3); // Mock cart count
+  const { getTotalItems, setIsOpen: setCartOpen } = useCart();
+  const { setIsOpen: setSearchOpen } = useSearch();
 
   const navigation = [
     { name: "Shop", href: "/shop" },
@@ -48,7 +51,12 @@ const Navbar = () => {
           {/* Search and Actions */}
           <div className="flex items-center space-x-4">
             {/* Search */}
-            <Button variant="ghost" size="icon" className="hidden sm:flex">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hidden sm:flex"
+              onClick={() => setSearchOpen(true)}
+            >
               <Search className="h-5 w-5" />
             </Button>
 
@@ -63,11 +71,16 @@ const Navbar = () => {
             </Button>
 
             {/* Cart */}
-            <Button variant="ghost" size="icon" className="relative">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="relative"
+              onClick={() => setCartOpen(true)}
+            >
               <ShoppingCart className="h-5 w-5" />
-              {cartItems > 0 && (
+              {getTotalItems() > 0 && (
                 <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs bg-secondary">
-                  {cartItems}
+                  {getTotalItems()}
                 </Badge>
               )}
             </Button>
@@ -98,8 +111,15 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
-              <div className="border-t border-border mt-4 pt-4">
-                <Button variant="ghost" className="w-full justify-start">
+               <div className="border-t border-border mt-4 pt-4">
+                <Button 
+                  variant="ghost" 
+                  className="w-full justify-start"
+                  onClick={() => {
+                    setSearchOpen(true);
+                    setIsMenuOpen(false);
+                  }}
+                >
                   <Search className="mr-2 h-4 w-4" />
                   Search
                 </Button>

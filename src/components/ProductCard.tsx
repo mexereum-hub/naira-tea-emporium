@@ -3,6 +3,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Star, ShoppingCart, Eye } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 interface Product {
   id: string;
@@ -26,6 +27,7 @@ interface ProductCardProps {
 const ProductCard = ({ product }: ProductCardProps) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const { addToCart } = useCart();
 
   const discount = product.originalPrice 
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
@@ -93,6 +95,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
               size="sm" 
               className="flex-1"
               disabled={!product.inStock}
+              onClick={(e) => {
+                e.stopPropagation();
+                addToCart(product);
+              }}
             >
               <ShoppingCart className="w-4 h-4 mr-2" />
               Add to Cart
