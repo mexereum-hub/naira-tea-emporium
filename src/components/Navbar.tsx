@@ -27,7 +27,7 @@ const Navbar = () => {
               <Leaf className="h-6 w-6 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-foreground">Naira Tea</h1>
+              <h1 className="text-xl font-bold text-foreground">Sue&Mon</h1>
               <p className="text-xs text-muted-foreground">Premium Herbal Blends</p>
             </div>
           </Link>

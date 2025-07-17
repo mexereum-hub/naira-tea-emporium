@@ -82,7 +82,7 @@ const Footer = () => {
                 <Leaf className="h-6 w-6 text-primary-foreground" />
               </div>
               <div>
-                <h2 className="text-xl font-bold">Naira Tea Emporium</h2>
+                <h2 className="text-xl font-bold">Sue&Mon</h2>
                 <p className="text-sm text-primary-foreground/80">Premium Herbal Blends</p>
               </div>
             </Link>
@@ -184,7 +184,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3 text-sm">
                 <Mail className="w-4 h-4 text-secondary" />
-                <span className="text-primary-foreground/80">hello@nairatea.ng</span>
+                <span className="text-primary-foreground/80">hello@suemon.ng</span>
               </div>
               <div className="flex items-center space-x-3 text-sm">
                 <MapPin className="w-4 h-4 text-secondary" />
@@ -200,7 +200,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             <p className="text-sm text-primary-foreground/60">
-              © {currentYear} Naira Tea Emporium. All rights reserved.
+              © {currentYear} Sue&Mon. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
               <Link to="/privacy" className="text-primary-foreground/60 hover:text-secondary transition-colors">
