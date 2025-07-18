@@ -35,26 +35,27 @@ const FeaturedProducts = () => {
     },
     {
       id: "3",
-      name: "Ginger Root Tea", 
-      description: "Fresh Nigerian ginger for digestive health, nausea relief, and natural warming properties.",
-      price: 2800,
-      originalPrice: 3200,
+      name: "Premium Ginger Spice", 
+      description: "Fresh Nigerian ginger root - perfect for cooking, teas, and natural healing remedies.",
+      price: 1800,
+      originalPrice: 2200,
       image: gingeerImage,
       rating: 4.7,
       reviews: 256,
-      benefits: ["Digestion", "Nausea Relief", "Anti-inflammatory"],
+      benefits: ["Digestion", "Cooking", "Anti-inflammatory"],
       inStock: true
     },
     {
       id: "4",
-      name: "Turmeric Golden Tea",
-      description: "Anti-inflammatory golden spice blend for joint health and natural healing support.",
-      price: 3500,
+      name: "Turmeric Golden Spice",
+      description: "Premium ground turmeric for cooking and tea blends - anti-inflammatory superfood spice.",
+      price: 2200,
       image: turmericImage,
       rating: 4.6,
       reviews: 142,
-      benefits: ["Joint Health", "Anti-inflammatory", "Healing"],
-      inStock: false
+      benefits: ["Anti-inflammatory", "Cooking", "Healing"],
+      inStock: true,
+      isBestseller: true
     }
   ];
 
@@ -64,11 +65,11 @@ const FeaturedProducts = () => {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Featured <span className="bg-gradient-hero bg-clip-text text-transparent">Premium Teas</span>
+            Featured <span className="bg-gradient-hero bg-clip-text text-transparent">Tea & Spices</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover our most popular herbal blends, carefully selected for their exceptional 
-            health benefits and authentic Nigerian flavors.
+            Discover our most popular teas and spices, carefully selected for their exceptional 
+            health benefits, culinary uses, and authentic Nigerian quality.
           </p>
         </div>
 

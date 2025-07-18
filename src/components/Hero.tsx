@@ -12,7 +12,7 @@ const Hero = () => {
           <div className="space-y-4">
             <Badge variant="secondary" className="bg-secondary/20 text-secondary font-medium px-4 py-2">
               <Leaf className="w-4 h-4 mr-2" />
-              Premium Nigerian Herbs
+              Premium Nigerian Tea & Spices
             </Badge>
             
             <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
@@ -20,13 +20,13 @@ const Hero = () => {
               <span className="bg-gradient-hero bg-clip-text text-transparent">
                 Ancient Wisdom
               </span>{" "}
-              <span className="text-foreground">of Nigerian Herbal Teas</span>
+              <span className="text-foreground">of Nigerian Tea & Spices</span>
             </h1>
             
             <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
-              Experience the healing power of traditional Nigerian herbs, carefully 
-              blended for modern wellness. From immune support to stress relief, 
-              discover your perfect cup of health.
+              Experience the healing power of traditional Nigerian tea and spices, carefully 
+              selected and blended for modern wellness. From immune support to culinary excellence, 
+              discover your perfect blend of health and flavor.
             </p>
           </div>
 
@@ -45,7 +45,7 @@ const Hero = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Button variant="hero" size="hero" className="group">
-              Shop Premium Teas
+              Shop Tea & Spices
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button variant="outline" size="hero">
@@ -92,7 +92,7 @@ const Hero = () => {
           <div className="relative rounded-2xl overflow-hidden shadow-warm">
             <img
               src={heroImage}
-              alt="Premium Nigerian herbal tea collection with traditional brewing equipment"
+              alt="Premium Nigerian tea and spices collection with traditional brewing equipment"
               className="w-full h-[600px] object-cover"
             />
             {/* Gradient Overlay */}

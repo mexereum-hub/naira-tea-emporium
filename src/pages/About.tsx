@@ -8,12 +8,12 @@ const About = () => {
     {
       icon: Leaf,
       title: "Natural & Pure",
-      description: "We source only the finest organic herbs from trusted Nigerian farmers, ensuring purity and potency in every blend."
+      description: "We source only the finest organic teas and spices from trusted Nigerian farmers, ensuring purity and potency in every product."
     },
     {
       icon: Heart,
       title: "Health First",
-      description: "Every tea blend is carefully crafted with your wellness in mind, combining traditional wisdom with modern research."
+      description: "Every tea blend and spice selection is carefully crafted with your wellness and culinary needs in mind, combining traditional wisdom with modern quality standards."
     },
     {
       icon: Users,
@@ -54,7 +54,7 @@ const About = () => {
           <div className="text-center mb-16">
             <h1 className="text-4xl font-bold text-foreground mb-6">About Sue&Mon</h1>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Founded by two passionate women, Sue and Monica, Sue&Mon was born from a shared vision to bring the healing power of Nigerian herbal traditions to modern wellness seekers. We believe that nature provides the best remedies for a healthy, balanced life.
+              Founded by two passionate women, Sue and Monica, Sue&Mon was born from a shared vision to bring the healing power of Nigerian tea and spice traditions to modern wellness seekers and culinary enthusiasts. We believe that nature provides the best ingredients for health, healing, and exceptional cooking.
             </p>
           </div>
 
@@ -64,13 +64,13 @@ const About = () => {
               <h2 className="text-2xl font-bold text-foreground mb-6 text-center">Our Story</h2>
               <div className="space-y-6 text-muted-foreground">
                 <p>
-                  Sue&Mon began in 2019 when childhood friends Sue and Monica reunited over a cup of hibiscus tea. Both had experienced the transformative power of traditional Nigerian herbs in their own health journeys and realized that these ancient remedies deserved a place in modern wellness.
+                  Sue&Mon began in 2019 when childhood friends Sue and Monica reunited over a cup of hibiscus tea and a meal seasoned with fresh Nigerian spices. Both had experienced the transformative power of traditional Nigerian herbs and spices in their health and culinary journeys, realizing these treasures deserved a place in modern wellness and cooking.
                 </p>
                 <p>
-                  What started as weekend experiments in Monica's kitchen quickly grew into a passion project. We spent months traveling across Nigeria, learning from traditional healers, meeting local farmers, and understanding the rich heritage of our medicinal plants.
+                  What started as weekend experiments in Monica's kitchen quickly grew into a passion project. We spent months traveling across Nigeria, learning from traditional healers and local cooks, meeting farmers, and understanding the rich heritage of our medicinal plants and culinary spices.
                 </p>
                 <p>
-                  Today, Sue&Mon is proud to offer premium herbal tea blends that honor our cultural heritage while meeting the highest standards of quality and purity. Every cup tells a story of tradition, wellness, and the beautiful land we call home.
+                  Today, Sue&Mon is proud to offer premium tea blends and authentic spices that honor our cultural heritage while meeting the highest standards of quality and purity. Every product tells a story of tradition, wellness, flavor, and the beautiful land we call home.
                 </p>
               </div>
             </div>

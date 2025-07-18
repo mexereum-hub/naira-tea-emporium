@@ -39,7 +39,7 @@ const Benefits = () => {
           <div className="text-center mb-12">
             <h1 className="text-3xl font-bold text-foreground mb-4">Health Benefits</h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Discover the powerful health benefits of our premium herbal tea blends, carefully selected for their therapeutic properties.
+              Discover the powerful health benefits of our premium tea blends and authentic spices, carefully selected for their therapeutic and culinary properties.
             </p>
           </div>
           
