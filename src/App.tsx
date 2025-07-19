@@ -14,6 +14,16 @@ import Benefits from "./pages/Benefits";
 import Subscription from "./pages/Subscription";
 import Blog from "./pages/Blog";
 import About from "./pages/About";
+import Story from "./pages/Story";
+import Contact from "./pages/Contact";
+import FAQ from "./pages/FAQ";
+import CategoryImmunity from "./pages/CategoryImmunity";
+import CategoryEnergy from "./pages/CategoryEnergy";
+import CategorySleep from "./pages/CategorySleep";
+import Gifts from "./pages/Gifts";
+import Support from "./pages/Support";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +44,16 @@ const App = () => (
               <Route path="/subscription" element={<Subscription />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/about" element={<About />} />
+              <Route path="/story" element={<Story />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/category/immunity" element={<CategoryImmunity />} />
+              <Route path="/category/energy" element={<CategoryEnergy />} />
+              <Route path="/category/sleep" element={<CategorySleep />} />
+              <Route path="/gifts" element={<Gifts />} />
+              <Route path="/support" element={<Support />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
