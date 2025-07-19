@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { useUserRole } from "@/hooks/useUserRole";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingCart, Search, Menu, X, Heart, User, Leaf } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useSearch } from "@/contexts/SearchContext";
+import { 
+  Leaf, 
+  Search, 
+  Heart, 
+  User, 
+  ShoppingCart, 
+  Menu, 
+  X 
+} from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const { isAdmin } = useUserRole();
   const { getTotalItems, setIsOpen: setCartOpen } = useCart();
   const { setIsOpen: setSearchOpen } = useSearch();
 
@@ -66,9 +78,26 @@ const Navbar = () => {
             </Button>
 
             {/* Account */}
-            <Button variant="ghost" size="icon">
-              <User className="h-5 w-5" />
-            </Button>
+            {user ? (
+              <div className="flex items-center space-x-2">
+                {isAdmin && (
+                  <Link to="/admin">
+                    <Button variant="outline" size="sm">
+                      Admin
+                    </Button>
+                  </Link>
+                )}
+                <Button variant="ghost" size="sm" onClick={signOut}>
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <Link to="/auth">
+                <Button variant="ghost" size="icon">
+                  <User className="h-5 w-5" />
+                </Button>
+              </Link>
+            )}
 
             {/* Cart */}
             <Button 

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import { SearchProvider } from "@/contexts/SearchContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 import CartSidebar from "@/components/CartSidebar";
 import SearchModal from "@/components/SearchModal";
 import Index from "./pages/Index";
@@ -24,6 +25,8 @@ import Gifts from "./pages/Gifts";
 import Support from "./pages/Support";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import Auth from "./pages/Auth";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,8 +34,9 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <CartProvider>
-        <SearchProvider>
+      <AuthProvider>
+        <CartProvider>
+          <SearchProvider>
           <Toaster />
           <Sonner />
           <BrowserRouter>
@@ -53,15 +57,17 @@ const App = () => (
               <Route path="/gifts" element={<Gifts />} />
               <Route path="/support" element={<Support />} />
               <Route path="/privacy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/admin" element={<AdminDashboard />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
             <CartSidebar />
             <SearchModal />
           </BrowserRouter>
-        </SearchProvider>
-      </CartProvider>
+          </SearchProvider>
+        </CartProvider>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
