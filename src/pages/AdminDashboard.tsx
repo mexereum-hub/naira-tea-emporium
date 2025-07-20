@@ -223,6 +223,8 @@ const AdminDashboard = () => {
         <Tabs defaultValue="users" className="space-y-6">
           <TabsList>
             <TabsTrigger value="users">User Management</TabsTrigger>
+            <TabsTrigger value="blog">Blog Posts</TabsTrigger>
+            <TabsTrigger value="pages">Page Content</TabsTrigger>
             <TabsTrigger value="products">Products</TabsTrigger>
             <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="settings">Settings</TabsTrigger>
@@ -308,6 +310,36 @@ const AdminDashboard = () => {
                     ))}
                   </TableBody>
                 </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="blog">
+            <Card>
+              <CardHeader>
+                <CardTitle>Blog Management</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Alert>
+                  <AlertDescription>
+                    Blog post management features will be implemented here. This will include creating, editing, and publishing blog posts.
+                  </AlertDescription>
+                </Alert>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="pages">
+            <Card>
+              <CardHeader>
+                <CardTitle>Page Content Management</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Alert>
+                  <AlertDescription>
+                    Dynamic page content management will be implemented here. This will include editing content for Story, FAQ, Benefits, and other pages.
+                  </AlertDescription>
+                </Alert>
               </CardContent>
             </Card>
           </TabsContent>

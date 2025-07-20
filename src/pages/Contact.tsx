@@ -5,8 +5,60 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Message sent!",
+        description: "Thank you for your message. We'll get back to you soon.",
+      });
+
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        subject: "",
+        message: ""
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -25,14 +77,50 @@ const Contact = () => {
                 <CardTitle>Send us a Message</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Input placeholder="First Name" />
-                  <Input placeholder="Last Name" />
-                </div>
-                <Input placeholder="Email Address" type="email" />
-                <Input placeholder="Subject" />
-                <Textarea placeholder="Your Message" rows={6} />
-                <Button className="w-full">Send Message</Button>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <Input 
+                      name="firstName"
+                      placeholder="First Name" 
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      required
+                    />
+                    <Input 
+                      name="lastName"
+                      placeholder="Last Name" 
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  <Input 
+                    name="email"
+                    placeholder="Email Address" 
+                    type="email" 
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <Input 
+                    name="subject"
+                    placeholder="Subject" 
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <Textarea 
+                    name="message"
+                    placeholder="Your Message" 
+                    rows={6} 
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <Button type="submit" className="w-full" disabled={isSubmitting}>
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                  </Button>
+                </form>
               </CardContent>
             </Card>
 
