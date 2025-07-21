@@ -31,8 +31,7 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks: {
-          react: ['react', 'react-dom'],
-          vendor: ['lodash', 'axios']
+          react: ['react', 'react-dom']
         }
       }
     }
