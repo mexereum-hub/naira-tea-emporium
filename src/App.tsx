@@ -25,6 +25,10 @@ import Gifts from "./pages/Gifts";
 import Support from "./pages/Support";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import Track from "./pages/Track";
+import Wholesale from "./pages/Wholesale";
+import Returns from "./pages/Returns";
+import Shipping from "./pages/Shipping";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
@@ -57,6 +61,11 @@ const App = () => (
               <Route path="/gifts" element={<Gifts />} />
               <Route path="/support" element={<Support />} />
               <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/track" element={<Track />} />
+              <Route path="/wholesale" element={<Wholesale />} />
+              <Route path="/returns" element={<Returns />} />
+              <Route path="/shipping" element={<Shipping />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/admin" element={<AdminDashboard />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

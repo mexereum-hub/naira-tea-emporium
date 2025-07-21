@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { HelpCircle, MessageCircle, Phone, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Support = () => {
   return (
@@ -25,7 +26,9 @@ const Support = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">Find answers to common questions</p>
-                <Button variant="outline" size="sm">View FAQ</Button>
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/faq">View FAQ</Link>
+                </Button>
               </CardContent>
             </Card>
 
@@ -36,7 +39,9 @@ const Support = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">Chat with our support team</p>
-                <Button variant="outline" size="sm">Start Chat</Button>
+                <Button variant="outline" size="sm" onClick={() => window.open('https://wa.me/2348000000000', '_blank')}>
+                  Start Chat
+                </Button>
               </CardContent>
             </Card>
 
@@ -47,7 +52,9 @@ const Support = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">+234 800 TEA SHOP</p>
-                <Button variant="outline" size="sm">Call Now</Button>
+                <Button variant="outline" size="sm" onClick={() => window.open('tel:+2348000000000', '_self')}>
+                  Call Now
+                </Button>
               </CardContent>
             </Card>
 
@@ -58,7 +65,9 @@ const Support = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">hello@suemon.ng</p>
-                <Button variant="outline" size="sm">Send Email</Button>
+                <Button variant="outline" size="sm" onClick={() => window.open('mailto:hello@suemon.ng', '_self')}>
+                  Send Email
+                </Button>
               </CardContent>
             </Card>
           </div>
