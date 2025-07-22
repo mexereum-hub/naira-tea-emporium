@@ -11,9 +11,13 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Textarea } from "@/components/ui/textarea";
-import { Users, Package, ShoppingCart, BarChart3, Settings, LogOut, Shield, Edit, Save, Plus } from "lucide-react";
+import { Users, Package, ShoppingCart, BarChart3, Settings, LogOut, Shield, Edit, Save, Plus, Trash2, Eye, Check, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Navigate, Link } from "react-router-dom";
+import { BlogManagement } from "@/components/admin/BlogManagement";
+import { ProductManagement } from "@/components/admin/ProductManagement";
+import { OrderManagement } from "@/components/admin/OrderManagement";
+import { SystemSettings } from "@/components/admin/SystemSettings";
 
 interface User {
   id: string;
@@ -34,6 +38,63 @@ interface PageContent {
   updated_at: string;
 }
 
+interface BlogPost {
+  id: string;
+  title: string;
+  content: string;
+  excerpt: string;
+  author: string;
+  category: string;
+  image_url?: string;
+  published: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image_url?: string;
+  category: string;
+  stock_quantity: number;
+  sku?: string;
+  weight_grams?: number;
+  is_active: boolean;
+  featured: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+interface Order {
+  id: string;
+  user_id?: string;
+  email: string;
+  phone?: string;
+  first_name: string;
+  last_name: string;
+  shipping_address: any;
+  billing_address?: any;
+  total_amount: number;
+  status: string;
+  payment_status: string;
+  payment_reference?: string;
+  tracking_number?: string;
+  notes?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface SystemSetting {
+  id: string;
+  key: string;
+  value: any;
+  description?: string;
+  created_at: string;
+  updated_at: string;
+}
+
 const AdminDashboard = () => {
   const { user, signOut } = useAuth();
   const { isAdmin, loading: roleLoading } = useUserRole();
@@ -47,6 +108,26 @@ const AdminDashboard = () => {
   const [newPageTitle, setNewPageTitle] = useState("");
   const [newPageSlug, setNewPageSlug] = useState("");
   const [newPageContent, setNewPageContent] = useState("");
+  
+  // Blog state
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [blogLoading, setBlogLoading] = useState(true);
+  const [editingBlog, setEditingBlog] = useState<string | null>(null);
+  
+  // Product state
+  const [products, setProducts] = useState<Product[]>([]);
+  const [productsLoading, setProductsLoading] = useState(true);
+  const [editingProduct, setEditingProduct] = useState<string | null>(null);
+  
+  // Order state
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [ordersLoading, setOrdersLoading] = useState(true);
+  
+  // Settings state
+  const [settings, setSettings] = useState<SystemSetting[]>([]);
+  const [settingsLoading, setSettingsLoading] = useState(true);
+  const [editingSetting, setEditingSetting] = useState<string | null>(null);
+  
   const { toast } = useToast();
 
   // Redirect if not admin
@@ -58,6 +139,10 @@ const AdminDashboard = () => {
     if (isAdmin) {
       fetchUsers();
       fetchPages();
+      fetchBlogPosts();
+      fetchProducts();
+      fetchOrders();
+      fetchSettings();
     }
   }, [isAdmin]);
 
@@ -265,6 +350,94 @@ const AdminDashboard = () => {
     }
   };
 
+  // Blog Functions
+  const fetchBlogPosts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setBlogPosts(data || []);
+    } catch (error) {
+      console.error('Error fetching blog posts:', error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch blog posts",
+        variant: "destructive"
+      });
+    } finally {
+      setBlogLoading(false);
+    }
+  };
+
+  // Product Functions
+  const fetchProducts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setProducts(data || []);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch products",
+        variant: "destructive"
+      });
+    } finally {
+      setProductsLoading(false);
+    }
+  };
+
+  // Order Functions
+  const fetchOrders = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('orders')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setOrders(data || []);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch orders",
+        variant: "destructive"
+      });
+    } finally {
+      setOrdersLoading(false);
+    }
+  };
+
+  // Settings Functions
+  const fetchSettings = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('system_settings')
+        .select('*')
+        .order('key', { ascending: true });
+
+      if (error) throw error;
+      setSettings(data || []);
+    } catch (error) {
+      console.error('Error fetching settings:', error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch settings",
+        variant: "destructive"
+      });
+    } finally {
+      setSettingsLoading(false);
+    }
+  };
+
   const handleSignOut = async () => {
     await signOut();
   };
@@ -327,7 +500,7 @@ const AdminDashboard = () => {
               <Package className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">24</div>
+              <div className="text-2xl font-bold">{products.length}</div>
             </CardContent>
           </Card>
           
@@ -337,17 +510,17 @@ const AdminDashboard = () => {
               <ShoppingCart className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">156</div>
+              <div className="text-2xl font-bold">{orders.length}</div>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Revenue</CardTitle>
+              <CardTitle className="text-sm font-medium">Blog Posts</CardTitle>
               <BarChart3 className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">₦2.4M</div>
+              <div className="text-2xl font-bold">{blogPosts.length}</div>
             </CardContent>
           </Card>
         </div>
@@ -447,18 +620,11 @@ const AdminDashboard = () => {
           </TabsContent>
           
           <TabsContent value="blog">
-            <Card>
-              <CardHeader>
-                <CardTitle>Blog Management</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Alert>
-                  <AlertDescription>
-                    Blog post management features will be implemented here. This will include creating, editing, and publishing blog posts.
-                  </AlertDescription>
-                </Alert>
-              </CardContent>
-            </Card>
+            <BlogManagement 
+              blogPosts={blogPosts}
+              blogLoading={blogLoading}
+              onRefresh={fetchBlogPosts}
+            />
           </TabsContent>
           
           <TabsContent value="pages" className="space-y-6">
@@ -585,48 +751,27 @@ const AdminDashboard = () => {
           </TabsContent>
           
           <TabsContent value="products">
-            <Card>
-              <CardHeader>
-                <CardTitle>Product Management</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Alert>
-                  <AlertDescription>
-                    Product management features will be implemented here. This will include adding, editing, and managing tea and spice inventory.
-                  </AlertDescription>
-                </Alert>
-              </CardContent>
-            </Card>
+            <ProductManagement 
+              products={products}
+              productsLoading={productsLoading}
+              onRefresh={fetchProducts}
+            />
           </TabsContent>
           
           <TabsContent value="orders">
-            <Card>
-              <CardHeader>
-                <CardTitle>Order Management</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Alert>
-                  <AlertDescription>
-                    Order management features will be implemented here. This will include viewing, processing, and fulfilling customer orders.
-                  </AlertDescription>
-                </Alert>
-              </CardContent>
-            </Card>
+            <OrderManagement 
+              orders={orders}
+              ordersLoading={ordersLoading}
+              onRefresh={fetchOrders}
+            />
           </TabsContent>
           
           <TabsContent value="settings">
-            <Card>
-              <CardHeader>
-                <CardTitle>System Settings</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Alert>
-                  <AlertDescription>
-                    System configuration options will be available here, including site settings, payment configuration, and other administrative tools.
-                  </AlertDescription>
-                </Alert>
-              </CardContent>
-            </Card>
+            <SystemSettings 
+              settings={settings}
+              settingsLoading={settingsLoading}
+              onRefresh={fetchSettings}
+            />
           </TabsContent>
         </Tabs>
       </div>
